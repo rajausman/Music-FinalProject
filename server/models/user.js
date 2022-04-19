@@ -1,18 +1,23 @@
-let users = [
-     {"userId": 1,"username":"Usman","password":"613727"},
-     {"userId": 2,"username":"Haider","password":"613727"} 
-    ];
 
+const util = require('../utility/util');
+let users = util.getUsers();
+ 
 module.exports = class User {
 
     static authUser(user) {
         const index = users.findIndex(p => p.username === user.username && p.password === user.password);
         if (index > -1) {
-            return users[index].username;
+            return  this.getUserToken(users[index]);
         } else {
             
             throw new Error('User NOT Found');
         }
+    }
+
+
+     static getUserToken (user) {
+       const tokenString = user.username+""+Date.now();
+       return { token : tokenString, username: user.username, userId: user.userId };
     }
 
 }

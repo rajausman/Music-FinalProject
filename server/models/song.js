@@ -9,10 +9,10 @@ module.exports = class Song {
         return songs;
     }
 
-    static deleteById(songId) {
-        const index = myPlayList.songList.findIndex(p => p.id === songId);
+    static deleteById(songId, userId) {
+        const index = myPlayList.findIndex(p => p.userId == userId);
         if (index > -1) {
-            myPlayList.songList = myPlayList.songList.filter(p => p.id !== songId);
+            myPlayList[index].songList = myPlayList[index].songList.filter(p => p.id != songId);
         } else {
             throw new Error('NOT Found');
         }
@@ -22,9 +22,7 @@ module.exports = class Song {
         
         const index = myPlayList.findIndex(p => p.userId === request.userId);
         if (index > -1) {
-
             const mySong = songs.find(song => song.id == request.id);
-            console.log("my song", mySong);
             myPlayList[index].songList.push(mySong);
 
         } else {

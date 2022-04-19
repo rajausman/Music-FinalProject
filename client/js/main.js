@@ -53,14 +53,6 @@ window.onload = function () {
     
 
 
-    // const playButton = document.createElement('a');
-    // playButton.id = prod.id;
-    // playButton.classList = 'icons fa-solid fa-circle-play fa-2x';
-    // playButton.addEventListener('click', function(event) {
-    //     event.preventDefault();
-    //     console.log(event);
-    // });
-
     const addInPlayList = document.createElement('a');
     addInPlayList.id = prod.id;
     addInPlayList.classList = 'icons fa-solid fa-circle-plus fa-2x';
@@ -154,24 +146,43 @@ function renderPlayList(item) {
         console.log(event);
     });
 
-    const deletePlayList = document.createElement('a');
-    deletePlayList.id = item.id;
-    deletePlayList.classList = 'icons fa-solid fa-trash-plus fa-2x';
-
-    deletePlayList.addEventListener('click', function(event) {
+    const deleteBtn = document.createElement('a');
+    deleteBtn.id = item.id;
+    deleteBtn.classList = 'icons m-25 fa-solid fa-circle-xmark fa-2x';
+    deleteBtn.addEventListener('click', function(event) {
         event.preventDefault();
-      
+        deleteItem(item.id);
+        const index = myPlayList.findIndex(myItem => myItem.id == item.id);
+        if(index > -1) {
+           myPlayList.splice(index, 1);
+           div.remove();
+        }
 
     });
 
+   
+
     cardBody.appendChild(playButton);
-    cardBody.appendChild(deletePlayList);
+    cardBody.appendChild(deleteBtn);
     cardDiv.append(cardBody);
     div.append(cardDiv);
 
     document.getElementById('playList').appendChild(div);
 } 
 
+
+async function deleteItem (songId) {
+
+    let myCollection = await fetch('http://localhost:4000/songs/'+songId+'/'+user.userId+'/deletePlayListItem', {
+           method: 'DELETE',
+           headers: {
+            'Content-type': 'application/json',
+          },
+
+       }   
+    
+    ).then(response => response);
+}
 
  function hideShowControls (searchDiv, formDiv, response) {
     if(response) {

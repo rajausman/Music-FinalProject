@@ -5,7 +5,8 @@ exports.getSongs = (req, res, next) => {
 }
 
 exports.deleteById = (req, res, next) => {
-    Song.deleteById(req.params.id);
+    console.log("delete params", req.params)
+    Song.deleteById(req.params.id, req.params.userId);
     res.status(200).end();
 }
 

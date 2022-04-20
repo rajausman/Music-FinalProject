@@ -1,11 +1,12 @@
 const Song = require('../models/song');
 
 exports.getSongs = (req, res, next) => {
+    console.log("songs headers", req.headers)
     res.status(200).json(Song.fetchAll());
 }
 
 exports.deleteById = (req, res, next) => {
-    console.log("delete params", req.params)
+   
     Song.deleteById(req.params.id, req.params.userId);
     res.status(200).end();
 }

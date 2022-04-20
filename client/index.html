@@ -7,120 +7,28 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script type="text/javascript" src="./js/main.js"></script>
 <style>
-    .audio-player {
-  height: 50px;
-  width: 350px;
-  background: #444;
-  box-shadow: 0 0 20px 0 #000a;
-  font-family: arial;
-  color: white;
-  font-size: 0.75em;
-  overflow: hidden;
-  display: grid;
-  grid-template-rows: 6px auto;
+.audio-player {
+    height: 50px;
+    width: 100%;
+    background: #fcc005;
+    box-shadow: 0 0 5px 0 #505050;
 }
-.audio-player .timeline {
-  background: white;
-  width: 100%;
-  position: relative;
-  cursor: pointer;
-  box-shadow: 0 2px 10px 0 #0008;
+
+audio::-webkit-media-controls-panel {
+  background-color: #ffb74d;
 }
-.audio-player .timeline .progress {
-  background: coral;
-  width: 0%;
-  height: 100%;
-  transition: 0.25s;
+
+audio::-webkit-media-controls-mute-button {
+  background-color:#ffb74d;
+  border-radius: 50%;
 }
-.audio-player .controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  padding: 0 20px;
+
+audio::-webkit-media-controls-play-button:hover {
+  background-color: #eb980d;
 }
-.audio-player .controls > * {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.audio-player .controls .toggle-play.play {
-  cursor: pointer;
-  position: relative;
-  left: 0;
-  height: 0;
-  width: 0;
-  border: 7px solid #0000;
-  border-left: 13px solid white;
-}
-.audio-player .controls .toggle-play.play:hover {
-  transform: scale(1.1);
-}
-.audio-player .controls .toggle-play.pause {
-  height: 15px;
-  width: 20px;
-  cursor: pointer;
-  position: relative;
-}
-.audio-player .controls .toggle-play.pause:before {
-  position: absolute;
-  top: 0;
-  left: 0px;
-  background: white;
-  content: "";
-  height: 15px;
-  width: 3px;
-}
-.audio-player .controls .toggle-play.pause:after {
-  position: absolute;
-  top: 0;
-  right: 8px;
-  background: white;
-  content: "";
-  height: 15px;
-  width: 3px;
-}
-.audio-player .controls .toggle-play.pause:hover {
-  transform: scale(1.1);
-}
-.audio-player .controls .time {
-  display: flex;
-}
-.audio-player .controls .time > * {
-  padding: 2px;
-}
-.audio-player .controls .volume-container {
-  cursor: pointer;
-  position: relative;
-  z-index: 2;
-}
-.audio-player .controls .volume-container .volume-button {
-  height: 26px;
-  display: flex;
-  align-items: center;
-}
-.audio-player .controls .volume-container .volume-button .volume {
-  transform: scale(0.7);
-}
-.audio-player .controls .volume-container .volume-slider {
-  position: absolute;
-  left: -3px;
-  top: 15px;
-  z-index: -1;
-  width: 0;
-  height: 15px;
-  background: white;
-  box-shadow: 0 0 20px #000a;
-  transition: 0.25s;
-}
-.audio-player .controls .volume-container .volume-slider .volume-percentage {
-  background: coral;
-  height: 100%;
-  width: 75%;
-}
-.audio-player .controls .volume-container:hover .volume-slider {
-  left: -123px;
-  width: 120px;
-}
+
+
+
 
     </style>
 </head>
@@ -229,10 +137,37 @@
 
 </main>
 
-<footer class="text-center text-white fixed-bottom" style="background-color: #fff; border:2px solid #ccc;">
+<footer id="footer" class="text-center text-white fixed-bottom" style="background-color: #fff; border:2px solid #ccc; display: none;">
    
-   <div id='audio'><audio controls src=''></audio></div> 
-    <div id="player"></div>
+   
+    <div class="d-flex" style="margin-top: 10px;">
+        <div class="col">
+            <div class="media-control" style="margin-left:25rem; margin-top: 0.5rem;">
+
+                <i id="previous" class="icons fa fa-fast-backward fa-2x" title="Previous"></i>
+                
+                <i id="next" class="icons fa fa-fast-forward fa-2x" title="Forward"></i>
+                
+                </div>
+        </div>
+        <div class="col">
+             <div id='audio'><audio class="audio-player" controls src=''></audio></div> 
+             <div id="player"></div>
+             
+        </div>
+        <div class="col"> 
+            <div class="media-control2" style="margin-right:25rem; margin-top:0.5rem;">
+
+                <i id="repeat" class="icons fa fa-repeat fa-2x" title="Repeat"></i>
+                
+                <i id="shuffle" class="icons fa fa-random fa-2x" title="Shuffle"></i>
+                
+                </div>
+        </div>
+      </div>
+
+   
+    
  
   </footer>
 

@@ -10,7 +10,7 @@ module.exports = class User {
             return  this.getUserToken(users[index]);
         } else {
             
-            throw new Error('User NOT Found');
+           return {status:404, message:"user not found"};
         }
     }
 

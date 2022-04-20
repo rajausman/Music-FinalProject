@@ -2,14 +2,14 @@
 
      function getSongsCollection () {
         return [
-            {
-               id:1,
-               img: "https://www.rafaelalucas.com/dailyui/9/covers/jain.jpg",
-               artistName: "Jain",
-               songName: "Makeba",
-               song: "https://www.rafaelalucas.com/dailyui/9/songs/song1.mp3",
-               color: "#f5c63d"
-            },
+            // {
+            //    id:1,
+            //    img: "https://www.rafaelalucas.com/dailyui/9/covers/jain.jpg",
+            //    artistName: "Jain",
+            //    songName: "Makeba",
+            //    song: "https://www.rafaelalucas.com/dailyui/9/songs/song1.mp3",
+            //    color: "#f5c63d"
+            // },
             {
                id:2,
                img: "https://www.rafaelalucas.com/dailyui/9/covers/ohland.jpg",
@@ -51,14 +51,14 @@
                color: "#a4b1b2"
             },
         
-            // {
-            //    id:7,
-            //    img: "https://www.rafaelalucas.com/dailyui/9/covers/dagny.jpg",
-            //    artistName: "Dagny",
-            //    songName: "Ultraviolet",
-            //    song: "https://www.rafaelalucas.com/dailyui/9/songs/song1.mp3",
-            //    color: "#8098ce"
-            // },
+            {
+               id:7,
+               img: "https://www.rafaelalucas.com/dailyui/9/covers/dagny.jpg",
+               artistName: "Dagny",
+               songName: "Ultraviolet",
+               song: "https://www.rafaelalucas.com/dailyui/9/songs/song1.mp3",
+               color: "#8098ce"
+            },
             // {
             //    id:8,
             //    img: "https://www.rafaelalucas.com/dailyui/9/covers/sigrid.jpg",

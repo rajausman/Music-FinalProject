@@ -222,6 +222,7 @@ async function deleteItem (songId) {
      document.getElementById("gallery").style.display = 'none';
      document.getElementById("error").innerText = "";
      document.getElementById("footer").style.display = 'block';
+     document.getElementById("labelPlaylist").style.display = 'block';
      getAllSongs();
      getMyPlayList(response);
     }
@@ -233,6 +234,8 @@ async function deleteItem (songId) {
      document.getElementById("footer").style.display = 'none';
      document.getElementById("products").innerHTML = "";
      document.getElementById("playList").innerHTML = "";
+     document.getElementById("labelPlaylist").style.display = 'none';
+     
     }
     
  }
@@ -251,11 +254,11 @@ async function deleteItem (songId) {
  }
 
  function setSessionStorage(item) {
-    sessionStorage.setItem('userDetails', JSON.stringify(item));
+  localStorage.setItem('userDetails', JSON.stringify(item));
  }
 
  function getSessionStorage () {
-   const response = sessionStorage.getItem('userDetails');
+   const response = localStorage.getItem('userDetails');
      return JSON.parse(response);
       
  }
@@ -300,7 +303,7 @@ async function deleteItem (songId) {
 
   document.getElementById('logout').onclick = function(event) {
     event.preventDefault();
-    sessionStorage.removeItem('userDetails');
+    localStorage.removeItem('userDetails');
     hideShowControls("searchDiv", "formDiv", getSessionStorage())
   }
 

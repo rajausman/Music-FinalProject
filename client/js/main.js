@@ -263,11 +263,28 @@ async function deleteItem (songId) {
  function playTrack (listItem) {
    
     document.getElementById('player').innerHTML = "";
+    document.getElementById('songName').innerHTML = "";
     document.getElementById('audio').style.display = 'block';
-    setTimeout(function (){
+
+    setTimeout(function () {
         document.getElementById('audio').style.display = 'none';
-        document.getElementById('player').innerHTML = '<audio id="audio-player" class="audio-player" controls="controls" src="'+listItem.song+'" type="audio/mp3">';
-    },500)
+        document.getElementById('songName').innerHTML = "<i class='fa-solid fa-music'></i> " +listItem.songName;
+        document.getElementById('player').innerHTML = '<audio id="audio-player" class="audio-player" controls="controls" data-repeat="" data-id="'+listItem.id+'" src="'+listItem.song+'" type="audio/mp3">';
+        document.getElementById('audio-player').addEventListener("ended", function() {
+          let audioElement = document.getElementById("audio-player");
+          const songRepition = Number(audioElement && audioElement.getAttribute('data-repeat'));
+          if(songRepition > 0) {
+             
+             const songItem = myPlayList.find(item => item.id == audioElement.getAttribute('data-id'));
+             playTrack(songItem);
+             setTimeout(function () {
+               document.getElementById("audio-player").setAttribute('data-repeat', songRepition - 1);
+               document.getElementById("audio-player").play();
+            },1000)
+           }
+      });
+
+    },500);
   }
 
 
@@ -286,6 +303,51 @@ async function deleteItem (songId) {
     sessionStorage.removeItem('userDetails');
     hideShowControls("searchDiv", "formDiv", getSessionStorage())
   }
+
+  document.getElementById("next").onclick = function () {
+  
+    const audioElement = document.getElementById("audio-player");
+    const audioSongId = audioElement && audioElement.getAttribute('data-id');
+    if(audioSongId) {
+    const currentIndex =  myPlayList.findIndex(item => item.id == audioSongId);
+    const nextIndex = (currentIndex + 1) % myPlayList.length;
+
+    if(nextIndex > -1)
+      playTrack(myPlayList[nextIndex]);
+    }
+  }
+
+
+  document.getElementById("previous").onclick = function () {
+    const audioElement = document.getElementById("audio-player");
+    const audioSongId = audioElement && audioElement.getAttribute('data-id');
+    if(audioSongId) {
+    const currentIndex =  myPlayList.findIndex(item => item.id == audioSongId);
+    const prevIndex = (currentIndex + myPlayList.length - 1) % myPlayList.length;
+
+    if(prevIndex > -1)
+       playTrack(myPlayList[prevIndex]);
+    }
+  }
+
+  document.getElementById("shuffle").onclick = function () {
+   const shuffleItem = myPlayList[Math.floor(Math.random() * myPlayList.length)];
+   if(shuffleItem) {
+      playTrack(shuffleItem);
+   }
+  }
+
+  document.getElementById("repeat").onclick = function () {
+    const audioElement = document.getElementById("audio-player");
+    const songRepition = Number(audioElement && audioElement.getAttribute('data-repeat'));
+    if(audioElement && songRepition >= 0) {
+      audioElement.setAttribute('data-repeat', songRepition + 1);
+
+    }
+
+    
+   }
+
  
  
 }
